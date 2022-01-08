@@ -15,21 +15,19 @@ public class RoundRobin {
         processes.sort((process1, process2) -> process1.arrivalTime < process2.arrivalTime ? 1 : 0);
 
         int currentTime = 0, completed = 0, idx = 0;
-        Process currentProcess = processes.get(0);
         int currentBurstTime = burstRemaining.get(0);
         Queue<Integer> q = new LinkedList<>();
 
         q.add(0);
         isMarked.put(0, true);
 
-        while (completed != n) {
+        while (completed != n) { // 0
             idx = q.remove();
-            currentProcess = processes.get(idx);
             currentBurstTime = burstRemaining.get(idx);
 
-            if (currentBurstTime == currentProcess.burstTime) {
-                currentProcess.startTime = Math.max(currentTime, currentProcess.arrivalTime);
-                currentTime = currentProcess.startTime;
+            if (currentBurstTime == processes.get(idx).burstTime) {
+                processes.get(idx).startTime = Math.max(currentTime, processes.get(idx).arrivalTime);
+                currentTime = processes.get(idx).startTime;
             }
 
             if (currentBurstTime - quantum > 0) {
@@ -40,14 +38,14 @@ public class RoundRobin {
                 currentBurstTime = 0;
                 ++completed;
 
-                currentProcess.completionTime = currentTime;
-                currentProcess.turnAroundTime = currentProcess.completionTime - currentProcess.arrivalTime;
-                currentProcess.waitingTime = currentProcess.turnAroundTime - currentProcess.burstTime;
-                currentProcess.responseTime = currentProcess.startTime - currentProcess.arrivalTime;
+                processes.get(idx).completionTime = currentTime;
+                processes.get(idx).turnAroundTime = processes.get(idx).completionTime - processes.get(idx).arrivalTime;
+                processes.get(idx).waitingTime = processes.get(idx).turnAroundTime - processes.get(idx).burstTime;
+                processes.get(idx).responseTime = processes.get(idx).startTime - processes.get(idx).arrivalTime;
 
-                totalTurnAroundTime += currentProcess.turnAroundTime;
-                totalWaitingTime += currentProcess.waitingTime;
-                totalResponseTime += currentProcess.responseTime;
+                totalTurnAroundTime += processes.get(idx).turnAroundTime;
+                totalWaitingTime += processes.get(idx).waitingTime;
+                totalResponseTime += processes.get(idx).responseTime;
             }
 
             for (int i = 1 ; i < n ; ++i) {
@@ -59,10 +57,6 @@ public class RoundRobin {
 
             if (currentBurstTime > 0)
                 q.add(idx);
-
-
-            processes.set(idx, currentProcess);
-            burstRemaining.set(idx, currentBurstTime);
 
             if (q.isEmpty()) {
                 for (int i = 1 ; i < n ; ++i) {
