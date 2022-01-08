@@ -11,7 +11,6 @@ public class SJF {
     private ArrayList<Process> processes;
 
     public void goShortestJobFirst() {
-        Process currentProcess = processes.get(0);
         int currentTime = 0, completed = 0, idx = -1, minBurstTime = Integer.MAX_VALUE;
 
         while (completed != n) {
@@ -34,27 +33,26 @@ public class SJF {
                 continue;
             }
 
-            currentProcess = processes.get(idx);
-            currentProcess.startTime = currentTime;
-            currentProcess.completionTime = currentProcess.startTime + currentProcess.burstTime;
-            currentProcess.turnAroundTime = currentProcess.completionTime - currentProcess.arrivalTime;
-            currentProcess.waitingTime = currentProcess.turnAroundTime - currentProcess.burstTime;
-            currentProcess.responseTime = currentProcess.startTime = currentProcess.arrivalTime;
+            processes.get(idx).startTime = currentTime;
+            processes.get(idx).completionTime = processes.get(idx).startTime + processes.get(idx).burstTime;
+            processes.get(idx).turnAroundTime = processes.get(idx).completionTime - processes.get(idx).arrivalTime;
+            processes.get(idx).waitingTime = processes.get(idx).turnAroundTime - processes.get(idx).burstTime;
+            processes.get(idx).responseTime = processes.get(idx).startTime = processes.get(idx).arrivalTime;
 
-            totalResponseTime += currentProcess.responseTime;;
-            totalTurnAroundTime += currentProcess.turnAroundTime;
-            totalWaitingTime += currentProcess.waitingTime;
+            totalResponseTime += processes.get(idx).responseTime;;
+            totalTurnAroundTime += processes.get(idx).turnAroundTime;
+            totalWaitingTime += processes.get(idx).waitingTime;
 
             isCompleted.put(idx, true);
             ++completed;
-            currentTime = currentProcess.completionTime;
+            currentTime = processes.get(idx).completionTime;
         }
 
         int minArrivalTime = Integer.MAX_VALUE;
         int maxCompletionTime = -1;
 
         for (int i = 0 ; i < n ; ++i) {
-            currentProcess = processes.get(i);
+            final Process currentProcess = processes.get(i);
             minArrivalTime = Math.min(minArrivalTime, currentProcess.arrivalTime);
             maxCompletionTime = Math.max(maxCompletionTime, currentProcess.completionTime);
         }
