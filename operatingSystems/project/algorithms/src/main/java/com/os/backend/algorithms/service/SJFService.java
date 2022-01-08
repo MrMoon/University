@@ -5,6 +5,6 @@ import com.os.backend.algorithms.model.AlgorithmResponse;
 
 public interface SJFService {
 
-    AlgorithmResponse sjf(final AlgorithmRequest process);
+    AlgorithmResponse sjf(final AlgorithmRequest algorithmRequest);
 
 }

@@ -4,6 +4,7 @@ import com.os.backend.algorithms.model.AlgorithmRequest;
 import com.os.backend.algorithms.model.AlgorithmResponse;
 import com.os.backend.algorithms.model.Process;
 import com.os.backend.algorithms.service.RoundRobinService;
+import com.os.backend.algorithms.utils.ProcessInfo;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -45,9 +46,7 @@ public class RoundRobinServiceImpl implements RoundRobinService {
                 ++completed;
 
                 processes.get(idx).setCompletionTime(currentTime);
-                processes.get(idx).setTurnAroundTime(processes.get(idx).getCompletionTime() - processes.get(idx).getArrivalTime());
-                processes.get(idx).setWaitingTime(processes.get(idx).getTurnAroundTime() - processes.get(idx).getBurstTime());
-                processes.get(idx).setResponseTime(processes.get(idx).getStartTime() - processes.get(idx).getArrivalTime());
+                ProcessInfo.updateProcessInfo(processes , idx);
 
                 totalTurnAroundTime += processes.get(idx).getTurnAroundTime();
                 totalWaitingTime += processes.get(idx).getWaitingTime();
