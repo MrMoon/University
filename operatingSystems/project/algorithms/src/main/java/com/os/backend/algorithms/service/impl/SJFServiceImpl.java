@@ -11,6 +11,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/*
+AT - Arrival Time of the process
+BT - Burst time of the process
+ST - Start time of the process
+CT - Completion time of the process
+TAT - Turnaround time of the process
+WT - Waiting time of the process
+RT - Response time of the process
+Formulas used:
+TAT = CT - AT
+WT = TAT - BT
+RT = ST - AT
+*/
 @Service
 public class SJFServiceImpl implements SJFService {
     @Override
@@ -70,6 +83,7 @@ public class SJFServiceImpl implements SJFService {
                 .averageTurnAroundTime((double) totalTurnAroundTime/N)
                 .averageWaitTime((double) totalWaitingTime/N)
                 .throughput((double) N / (maxCompletionTime - minArrivalTime))
+                .processes(processes)
                 .build();
     }
 }

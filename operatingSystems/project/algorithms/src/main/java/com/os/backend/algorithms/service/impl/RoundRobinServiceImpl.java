@@ -9,6 +9,19 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+/*
+AT - Arrival Time of the process
+BT - Burst time of the process
+ST - Start time of the process
+CT - Completion time of the process
+TAT - Turnaround time of the process
+WT - Waiting time of the process
+RT - Response time of the process
+Formulas used:
+TAT = CT - AT
+WT = TAT - BT
+RT = ST - AT
+*/
 @Service
 public class RoundRobinServiceImpl implements RoundRobinService {
     @Override
@@ -74,12 +87,15 @@ public class RoundRobinServiceImpl implements RoundRobinService {
             }
         }
 
+        processes.sort((process1, process2) -> process1.getPid() < process2.getPid() ? 1 : 0);
+
         return AlgorithmResponse
                 .builder()
                 .averageTurnAroundTime((double) totalTurnAroundTime / N)
                 .averageResponseTime((double) totalResponseTime / N)
                 .averageWaitTime((double) totalWaitingTime / N)
                 .throughput((double) N / ( processes.get(N - 1).getCompletionTime() - processes.get(0).getArrivalTime() ))
+                .processes(processes)
                 .build();
     }
 }
