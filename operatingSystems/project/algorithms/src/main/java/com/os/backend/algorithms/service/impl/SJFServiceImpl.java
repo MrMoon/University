@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /*
@@ -30,15 +31,27 @@ public class SJFServiceImpl implements SJFService {
     public AlgorithmResponse sjf(final AlgorithmRequest algorithmRequest) {
         final int N = algorithmRequest.getN();
         int totalTurnAroundTime = 0, totalWaitingTime = 0, totalResponseTime = 0;
-        final ArrayList<Process> processes = algorithmRequest.getProcesses();
-        final ArrayList<Integer> burstRemaining = algorithmRequest.getBurstRemaining();
+        final List<Integer> arrivalTimes = algorithmRequest.getArrivalTimes();
+        final List<Integer> burstTimes = algorithmRequest.getBurstTimes();
         final Map<Integer, Boolean> isCompleted = new HashMap<>();
         int currentTime = 0, completed = 0, idx = -1, minBurstTime = Integer.MAX_VALUE;
 
+        final List<Process> processes = new ArrayList<>();
+        for (int i = 0 ; i < N ; ++i) {
+            processes.add(Process
+                    .builder()
+                    .pid(i)
+                    .burstTime(burstTimes.get(i))
+                    .arrivalTime(arrivalTimes.get(i))
+                    .build());
+        }
+
         while (completed != N) {
+            idx = -1;
+            minBurstTime = Integer.MAX_VALUE;
             for (int i = 0 ; i < N ; ++i) {
                 final Process process = processes.get(i);
-                if (process.getArrivalTime() <= currentTime && isCompleted.get(i)) {
+                 if (process.getArrivalTime() <= currentTime && !isCompleted.getOrDefault(i, false)) {
                     if (process.getBurstTime() < minBurstTime) {
                         minBurstTime = process.getBurstTime();
                         idx = i;

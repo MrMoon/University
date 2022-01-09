@@ -22,20 +22,30 @@ TAT = CT - AT
 WT = TAT - BT
 RT = ST - AT
 */
+
 @Service
 public class RoundRobinServiceImpl implements RoundRobinService {
     @Override
     public AlgorithmResponse roundRobin(final int quantum, final AlgorithmRequest algorithmRequest) {
         final int N = algorithmRequest.getN();
-        final ArrayList<Process> processes = algorithmRequest.getProcesses();
-        final ArrayList<Integer> burstRemaining = algorithmRequest.getBurstRemaining();
+        final List<Integer> arrivalTimes = algorithmRequest.getArrivalTimes();
+        final List<Integer> burstTimes = algorithmRequest.getBurstTimes();
         final Map<Integer, Boolean> isMarked = new HashMap<>();
         int totalTurnAroundTime = 0, totalWaitingTime = 0, totalResponseTime = 0;
+
+        final List<Process> processes = new ArrayList<>();
+        for (int i = 0 ; i < N ; ++i) {
+            processes.add(Process
+                    .builder()
+                    .pid(i)
+                    .burstTime(burstTimes.get(i))
+                    .arrivalTime(arrivalTimes.get(i))
+                    .build());
+        }
 
         processes.sort((process1, process2) -> process1.getArrivalTime() < process2.getArrivalTime() ? 1 : 0);
 
         int currentTime = 0, completed = 0, idx = 0;
-        int currentBurstTime = burstRemaining.get(0);
         Queue<Integer> q = new LinkedList<>();
 
         q.add(0);
@@ -43,19 +53,18 @@ public class RoundRobinServiceImpl implements RoundRobinService {
 
         while (completed != N) {
             idx = q.remove();
-            currentBurstTime = burstRemaining.get(idx);
 
-            if (currentBurstTime == processes.get(idx).getBurstTime()) {
+            if (burstTimes.get(idx) == processes.get(idx).getBurstTime()) {
                 processes.get(idx).setStartTime(Math.max(currentTime, processes.get(idx).getArrivalTime()));
                 currentTime = processes.get(idx).getStartTime();
             }
 
-            if (currentBurstTime - quantum > 0) {
-                currentBurstTime -= quantum;
+            if (burstTimes.get(idx) - quantum > 0) {
+                burstTimes.set(idx, burstTimes.get(idx) - quantum);
                 currentTime += quantum;
             } else {
-                currentTime += currentBurstTime;
-                currentBurstTime = 0;
+                currentTime += burstTimes.get(idx);
+                burstTimes.set(idx, 0);
                 ++completed;
 
                 processes.get(idx).setCompletionTime(currentTime);
@@ -67,18 +76,18 @@ public class RoundRobinServiceImpl implements RoundRobinService {
             }
 
             for (int i = 1 ; i < N ; ++i) {
-                if (currentBurstTime > 0 && processes.get(i).getArrivalTime() <= currentTime && !isMarked.get(i)) {
+                if (burstTimes.get(idx) > 0 && processes.get(i).getArrivalTime() <= currentTime && (isMarked.containsKey(i) && !isMarked.get(i))) {
                     q.add(i);
                     isMarked.put(i, true);
                 }
             }
 
-            if (currentBurstTime > 0)
+            if (burstTimes.get(idx) > 0)
                 q.add(idx);
 
             if (q.isEmpty()) {
                 for (int i = 1 ; i < N ; ++i) {
-                    if (burstRemaining.get(i) > 0) {
+                    if (burstTimes.get(i) > 0) {
                         q.add(i);
                         isMarked.put(i, true);
                         break;
