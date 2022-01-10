@@ -11,9 +11,9 @@ import {
 import {useState} from "react";
 
 function App() {
-    let fileReader, arrivalTimes = [], burstTimes = [];
+    let fileReader, userArrivalTimes = [], userBurstTimes = [], numberOfProcess = 0;
     const [algorithm, setAlgorithm] = useState('both');
-    const [quantum, setQuantum] = useState(0);
+    const [quantum, setQuantum] = useState(-1);
 
     const handleAlgorithm = (event) => {
         setAlgorithm(event.target.value);
@@ -28,15 +28,12 @@ function App() {
 
     const handleFileRead = (e) => {
         const content = fileReader.result.split('\n');
-        console.log(content);
-        for (let i = 0 ; i < content.length - 1 ; ++i) {
+        numberOfProcess = content.length - 1;
+        for (let i = 0 ; i < numberOfProcess ; ++i) {
             const x = content[i].split(' ');
-            console.log(x);
-            arrivalTimes.push(x[0]);
-            burstTimes.push(x[1]);
+            userArrivalTimes.push(x[0]);
+            userBurstTimes.push(x[1]);
         }
-        console.log(arrivalTimes);
-        console.log(burstTimes);
     };
 
     const handleFileChosen = (file) => {
@@ -46,7 +43,23 @@ function App() {
     };
 
     const handleSchedule = (e) => {
-
+        const userAlgo = (algorithm === 'both') ? '' : algorithm;
+        const userQ = (quantum === -1) ? '' : quantum.toString();
+        let url = 'http://localhost:8080/schedule/' + userAlgo;
+        if (userQ !== '')
+            url += '/' + userQ;
+        console.log(userArrivalTimes);
+        console.log(userBurstTimes)
+        fetch(url, {
+            method: 'POST',
+            mode: 'no-cors',
+            credentials: 'same-origin',
+            body: JSON.stringify({
+                "n": numberOfProcess,
+                "arrivalTimes": userArrivalTimes,
+                "burstTimes": userBurstTimes
+            })
+        }).then(r => console.log(r));
     }
 
     return (

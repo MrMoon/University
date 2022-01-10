@@ -9,29 +9,22 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/schedule")
-@CrossOrigin(origins = "http://localhost:3000")
 @RequiredArgsConstructor
 public class SchedulingController {
 
     private final RoundRobinService roundRobinService;
     private final SJFService sjfService;
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/rr/{quantum}")
     public AlgorithmResponse roundRobin(@PathVariable("quantum") Integer quantum, @RequestBody AlgorithmRequest algorithmRequest) {
         return roundRobinService.roundRobin(quantum, algorithmRequest);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/sjf")
     public AlgorithmResponse sjf(@RequestBody AlgorithmRequest algorithmRequest) {
         return sjfService.sjf(algorithmRequest);
-    }
-
-    @PostMapping("/{quantum}")
-    public AlgorithmResponse[] both(@PathVariable("quantum") Integer quantum, @RequestBody AlgorithmRequest algorithmRequest) {
-        AlgorithmResponse[] algorithmResponses = new AlgorithmResponse[2];
-        algorithmResponses[0] = roundRobinService.roundRobin(quantum, algorithmRequest);
-        algorithmResponses[1] = sjf(algorithmRequest);
-        return algorithmResponses;
     }
 
 }
