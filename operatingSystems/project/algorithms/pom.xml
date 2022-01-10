@@ -38,6 +38,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.aries.spec</groupId>
+			<artifactId>org.apache.aries.javax.jax.rs-api</artifactId>
+			<version>1.0.4</version>
+		</dependency>
 	</dependencies>
 
 	<build>
