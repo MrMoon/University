@@ -11,7 +11,7 @@ import {
 import {useState} from "react";
 
 function App() {
-    let fileReader;
+    let fileReader, arrivalTimes = [], burstTimes = [];
     const [algorithm, setAlgorithm] = useState('both');
     const [quantum, setQuantum] = useState(0);
 
@@ -27,8 +27,16 @@ function App() {
     };
 
     const handleFileRead = (e) => {
-        const content = fileReader.result;
+        const content = fileReader.result.split('\n');
         console.log(content);
+        for (let i = 0 ; i < content.length - 1 ; ++i) {
+            const x = content[i].split(' ');
+            console.log(x);
+            arrivalTimes.push(x[0]);
+            burstTimes.push(x[1]);
+        }
+        console.log(arrivalTimes);
+        console.log(burstTimes);
     };
 
     const handleFileChosen = (file) => {
@@ -36,6 +44,10 @@ function App() {
         fileReader.onloadend = handleFileRead;
         fileReader.readAsText(file);
     };
+
+    const handleSchedule = (e) => {
+
+    }
 
     return (
         <div className="centerContent">
@@ -73,7 +85,7 @@ function App() {
                 />
             </div>
             <hr/>
-            <Button variant="contained">Schedule</Button>
+            <Button onClick={handleSchedule} variant="contained">Schedule</Button>
         </div>
     );
 }
