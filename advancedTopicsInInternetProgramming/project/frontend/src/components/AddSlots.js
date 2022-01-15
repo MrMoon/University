@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import axios from "axios";
+import {auth} from "../../utils/auth";
 
 export const AddSlots = () => {
     const [teacherName, setTeacherName] = useState('');
@@ -36,7 +37,7 @@ export const AddSlots = () => {
     }
 
     return (
-        <div class="addform">
+        <div className="addform">
             <form onSubmit={handleAddSlots}>
                 <h1 className="addform__heading">Add Slots</h1>
                 <input
