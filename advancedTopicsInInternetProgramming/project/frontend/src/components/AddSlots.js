@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import axios from "axios";
 import {auth} from "../../utils/auth";
+import "../styles/addform.scss";
 
 export const AddSlots = () => {
     const [teacherName, setTeacherName] = useState('');
@@ -13,11 +14,11 @@ export const AddSlots = () => {
         e.preventDefault();
         e.persist();
         const slotDetails = {
-          teacherName,
-          subjectName,
-          session,
-          section,
-          lectures
+            teacherName,
+            subjectName,
+            session,
+            section,
+            lectures
         };
 
         try {
@@ -61,7 +62,7 @@ export const AddSlots = () => {
                     type="number"
                     placeholder="Session"
                     value={session}
-                    onChange={event => setSession(event.target.value)}
+                    onChange={event => setSession(Number.parseInt(event.target.value))}
                     name="session"
                 />
                 <input
@@ -77,7 +78,7 @@ export const AddSlots = () => {
                     type="number"
                     placeholder="Lectures"
                     value={lectures}
-                    onChange={event => setLectures(event.target.value)}
+                    onChange={event => setLectures(Number.parseInt(event.target.value))}
                     name="contactHours"
                 />
                 <input

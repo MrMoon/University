@@ -1,5 +1,7 @@
 import React, {useState} from "react";
 import axios from "axios";
+import "../styles/addform.scss";
+import {auth} from "../../utils/auth";
 
 export const AddClass = () => {
 
@@ -51,7 +53,7 @@ export const AddClass = () => {
                     className="addform__input  addform__input--half addform__input--left"
                     type="text"
                     value={session}
-                    onChange={e => setSession(e.target.value)}
+                    onChange={e => setSession(Number.parseInt(e.target.value))}
                     placeholder="Session"
                     name="session"
                 />

@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {auth} from "../../utils/auth";
 import axios from "axios";
+import "../styles/addform.scss";
 
 export const AddSubject = () => {
 
@@ -62,7 +63,7 @@ export const AddSubject = () => {
                     type="number"
                     placeholder="Credit Hours"
                     value={creditHours}
-                    onChange={e => setCreditHours(e.target.value)}
+                    onChange={e => setCreditHours(Number.parseInt(e.target.value))}
                     name="creditHours"
                 />
                 <input
@@ -70,7 +71,7 @@ export const AddSubject = () => {
                     type="number"
                     placeholder="Contact Hours"
                     value={contactHours}
-                    onChange={e => setContactHours(e.target.value)}
+                    onChange={e => setContactHours(Number.parseInt(e.target.value))}
                     name="contactHours"
                 />
                 <input
@@ -78,7 +79,7 @@ export const AddSubject = () => {
                     type="number"
                     placeholder="labs"
                     value={labs}
-                    onChange={e => setLabs(e.target.value)}
+                    onChange={e => setLabs(Number.parseInt(e.target.value))}
                     name="labs"
                 />
                 <input

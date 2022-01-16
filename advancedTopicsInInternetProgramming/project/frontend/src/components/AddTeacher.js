@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import {auth} from "../../utils/auth";
 import axios from "axios";
+import "../styles/addform.scss";
+
 
 export const AddTeacher = () => {
 
