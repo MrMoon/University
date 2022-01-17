@@ -1,5 +1,5 @@
 import React from "react";
-import {BrowserRouter, NavLink, Route, Switch, useRouteMatch} from "react-router-dom";
+import {BrowserRouter, NavLink, Route} from "react-router-dom";
 import {AddClass} from "./AddClass";
 import {AddSubject} from "./AddSubject";
 import {AddTeacher} from "./AddTeacher";
@@ -8,7 +8,7 @@ import {ClassList} from "./ClassList";
 import axios from "axios";
 import "../styles/dashboard.scss";
 import Logo from "../logo.svg";
-import {auth} from "../../utils/auth";
+import {auth} from "../utils/auth";
 import {SubjectList} from "./SubjectList";
 import {TeacherList} from "./TeacherList";
 import {SlotList} from "./SlotList";
@@ -16,10 +16,9 @@ import {Timetable} from "./Timetable";
 import {OperateManual} from "./OperateManual";
 
 export const Dashboard = () => {
-    let { path, url } = useRouteMatch();
 
     const handleLogout = async () => {
-        try{
+        try {
             const authToken = auth.getAuthToken();
             const config = {
                 headers: {
@@ -28,13 +27,13 @@ export const Dashboard = () => {
                 }
             }
             const body = JSON.stringify({});
-            const res = await axios.post('/api/user/logout',body, config);
+            const res = await axios.post('/api/user/logout', body, config);
             console.log(res);
-            if(res.status === 200){
+            if (res.status === 200) {
                 auth.removeAuthToken(authToken);
                 window.location.href = '/';
             }
-        } catch(err){
+        } catch (err) {
             console.log(err);
         }
     };
@@ -43,12 +42,12 @@ export const Dashboard = () => {
         <BrowserRouter>
             <div className="dashboard row-2-1-5">
                 <div className="sidebar">
-                    <img className="logo" src={Logo} alt="Logo" />
+                    <img className="logo" src={Logo} alt="Logo"/>
                     <ul className="menu">
                         <li className="menu__li menu__li--class">
                             <NavLink
                                 className="menu__link menu__link--top"
-                                to={`${url}/classes/add`}
+                                to={`/classes/add`}
                             >
                                 Classes
                             </NavLink>
@@ -56,7 +55,7 @@ export const Dashboard = () => {
                                 <li className="submenu__item">
                                     <NavLink
                                         className="submenu__link"
-                                        to={`${url}/classes/add`}
+                                        to={`/classes/add`}
                                     >
                                         Add Class
                                     </NavLink>
@@ -64,7 +63,7 @@ export const Dashboard = () => {
                                 <li className="submenu__item">
                                     <NavLink
                                         className="submenu__link"
-                                        to={`${url}/classes/view`}
+                                        to={`/classes/view`}
                                     >
                                         All Classes
                                     </NavLink>
@@ -73,14 +72,14 @@ export const Dashboard = () => {
                         </li>
 
                         <li className="menu__li menu__li--subject">
-                            <NavLink className="menu__link" to={`${url}/subjects/add`}>
+                            <NavLink className="menu__link" to={`/subjects/add`}>
                                 Subjects
                             </NavLink>
                             <ul className="submenu submenu--subject">
                                 <li className="submenu__item">
                                     <NavLink
                                         className="submenu__link"
-                                        to={`${url}/subjects/add`}
+                                        to={`/subjects/add`}
                                     >
                                         Add Subject
                                     </NavLink>
@@ -88,7 +87,7 @@ export const Dashboard = () => {
                                 <li className="submenu__item">
                                     <NavLink
                                         className="submenu__link"
-                                        to={`${url}/subjects/view`}
+                                        to={`/subjects/view`}
                                     >
                                         All Subjects
                                     </NavLink>
@@ -97,14 +96,14 @@ export const Dashboard = () => {
                         </li>
 
                         <li className="menu__li menu__li--teacher">
-                            <NavLink className="menu__link" to={`${url}/teachers/add`}>
+                            <NavLink className="menu__link" to={`/teachers/add`}>
                                 Teachers
                             </NavLink>
                             <ul className="submenu submenu--teacher">
                                 <li className="submenu__item">
                                     <NavLink
                                         className="submenu__link"
-                                        to={`${url}/teachers/add`}
+                                        to={`/teachers/add`}
                                     >
                                         Add Teacher
                                     </NavLink>
@@ -112,7 +111,7 @@ export const Dashboard = () => {
                                 <li className="submenu__item">
                                     <NavLink
                                         className="submenu__link"
-                                        to={`${url}/teachers/view`}
+                                        to={`/teachers/view`}
                                     >
                                         All Teachers
                                     </NavLink>
@@ -121,14 +120,14 @@ export const Dashboard = () => {
                         </li>
 
                         <li className="menu__li menu__li--slot">
-                            <NavLink className="menu__link" to={`${url}/slots/add`}>
+                            <NavLink className="menu__link" to={`/slots/add`}>
                                 Slots
                             </NavLink>
                             <ul className="submenu submenu--slot">
                                 <li className="submenu__item">
                                     <NavLink
                                         className="submenu__link"
-                                        to={`${url}/slots/add`}
+                                        to={`/slots/add`}
                                     >
                                         Add Slot
                                     </NavLink>
@@ -136,7 +135,7 @@ export const Dashboard = () => {
                                 <li className="submenu__item">
                                     <NavLink
                                         className="submenu__link"
-                                        to={`${url}/slots/view`}
+                                        to={`/slots/view`}
                                     >
                                         All Slots
                                     </NavLink>
@@ -145,7 +144,7 @@ export const Dashboard = () => {
                         </li>
 
                         <li className="menu__li">
-                            <NavLink to={`${url}/timetable`} className="menu__btn">
+                            <NavLink to={`/timetable`} className="menu__btn">
                                 Generate
                             </NavLink>
                         </li>
@@ -160,38 +159,16 @@ export const Dashboard = () => {
                         </ul>
                     </div>
                     <div className="component-container">
-                        <Switch>
-                            <Route path={`${url}/classes/add`}>
-                                <AddClass/>
-                            </Route>
-                            <Route path={`${url}/subjects/add`}>
-                                <AddSubject/>
-                            </Route>
-                            <Route path={`${url}/teachers/add`}>
-                                <AddTeacher/>
-                            </Route>
-                            <Route path={`${url}/slots/add`}>
-                                <AddSlots/>
-                            </Route>
-                            <Route path={`${url}/classes/view`}>
-                                <ClassList/>
-                            </Route>
-                            <Route path={`${url}/subjects/view`}>
-                                <SubjectList/>
-                            </Route>
-                            <Route path={`${url}/teachers/view`}>
-                                <TeacherList/>
-                            </Route>
-                            <Route path={`${url}/slots/view`}>
-                                <SlotList />
-                            </Route>
-                            <Route path={`${url}/timetable`}>
-                                <Timetable />
-                            </Route>
-                            <Route path={`${url}/`}>
-                                <OperateManual />
-                            </Route>
-                        </Switch>
+                        <Route path={`/classes/add`} component={AddClass}/>
+                        <Route path={`/subjects/add`} component={AddSubject}/>
+                        <Route path={`/teachers/add`} component={AddTeacher}/>
+                        <Route path={`/slots/add`} component={AddSlots}/>
+                        <Route path={`/classes/view`} component={ClassList}/>
+                        <Route path={`/subjects/view`} component={SubjectList}/>
+                        <Route path={`/teachers/view`} component={TeacherList}/>
+                        <Route path={`/slots/view`} component={SlotList}/>
+                        <Route path={`/timetable`} component={Timetable}/>
+                        <Route path={`/`} component={OperateManual}/>
                     </div>
                 </div>
             </div>

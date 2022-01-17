@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import axios from "axios";
-import {auth} from "../../utils/auth";
+import {auth} from "../utils/auth";
 import "../styles/addform.scss";
 
 export const AddSlots = () => {

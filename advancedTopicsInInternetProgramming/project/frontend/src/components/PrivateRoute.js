@@ -1,5 +1,5 @@
 import React from "react";
-import {auth} from "../../utils/auth";
+import {auth} from "../utils/auth";
 import {Route} from "react-router-dom";
 
 export const PrivateRoute = ({children, ...others}) => {

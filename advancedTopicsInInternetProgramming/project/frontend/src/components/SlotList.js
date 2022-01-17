@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import {auth} from "../../utils/auth";
+import {auth} from "../utils/auth";
 import "../styles/slotslist.scss";
 import {SlotListItem} from "./SlotListItem";
 

@@ -1,10 +1,10 @@
 import React, {useState} from "react";
 import {Message} from "semantic-ui-react";
 import {Link} from "@mui/material";
-import {auth} from "../../utils/auth";
+import {auth} from "../utils/auth";
 import axios from "axios";
 import '../styles/form.scss';
-import {displayErrors, isFormValid} from "../../utils/FormValidation";
+import {displayErrors, isFormValid} from "../utils/FormValidation";
 
 export const Login = () => {
 

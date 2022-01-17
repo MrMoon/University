@@ -2,8 +2,8 @@ import React, {useState} from "react";
 import {Message} from "semantic-ui-react";
 import {Link} from "@mui/material";
 import axios from "axios";
-import {auth} from "../../utils/auth";
-import {displayErrors, isFormValid} from "../../utils/FormValidation";
+import {auth} from "../utils/auth";
+import {displayErrors, isFormValid} from "../utils/FormValidation";
 import '../styles/form.scss';
 
 

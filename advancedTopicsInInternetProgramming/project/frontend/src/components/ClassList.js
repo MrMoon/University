@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {auth} from "../../utils/auth";
+import {auth} from "../utils/auth";
 import axios from "axios";
 import {ClassListItem} from "./ClassListItem";
 import "../styles/classlist.scss";

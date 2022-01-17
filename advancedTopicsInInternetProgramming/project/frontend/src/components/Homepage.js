@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import {auth} from "../../utils/auth";
+import {auth} from "../utils/auth";
 import "../styles/homepage.scss";
 import {OperateManual} from "./OperateManual";
 
