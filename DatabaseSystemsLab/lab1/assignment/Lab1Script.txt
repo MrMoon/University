@@ -1,0 +1,20 @@
+drop table people cascade constraints;
+create table people(person_ID number(5) primary key,First_Name varchar2(20) not null,Last_Name varchar2(20) not null,
+MOBILE varchar2(10),EMAIL varchar2(30),
+SSN varchar2(10),Income NUMBER(8,2),Tax NUMBER(8,2),GENDER VARCHAR2(6),City VARCHAR2(10),Reg_date date,age number(3));
+insert into people values(1,'Ali','Ahmad','0711111111','aliahmad@yahoo.com','9343423433',1000,44,'male','Amman','25-feb-2013',13);
+insert into people values(2,'Samer','Ali','0722132132','samerali@yahoo.com','9445555555',800,50,'male','Amman','11-dec-2013',33);
+insert into people values(3,'Aseel','Ali','0714565546','aseelali@yahoo.com','9666666666',120,0,'female','Amman','10-sep-1987',34);
+insert into people values(4,'Mahmod','Ali','0716543111','mahrami@yahoo.com','9777777779',120,10,'male','Amman','8-sep-1987',44);
+insert into people values(5,'Heba','Omar','0711343243','hebaomar@yahoo.com','9999994449',1040,20,'female','Irbid','9-dec-1989',22);
+insert into people values(6,'Rima','Omar','0718789098','rimaamer@yahoo.com','9944499999',1080,30,'female','Irbid','18-feb-2014',11);
+insert into people values(7,'Ola','Ahmad','0715566443','olaadham@yahoo.com','9999599999',3000,70,'female','Aqaba','18-oct-1992',66);
+insert into people values(8,'Jamal','Salah','0713423433','jamalsalah@yahoo.com','9976599999',1200,60,'male','Amman','9-oct-1993',77);
+insert into people values(9,'Salah','Naser','0718675764','salahnaser@yahoo.com','9999900099',400,30,'male','Aqaba','11-jan-1992',43);
+insert into people values(10,'Esam','Ibrahim','0715454545','esambader@yahoo.com','9999954639',600,20,'male','Irbid','12-jan-1995',32);
+insert into people values(11,'Ammar','Ibrahim','0713432433','ammaribrahim@yahoo.com','9192345999',800,20,'male','Amman','22-mar-1997',65);
+insert into people values(12,'Salwa','Ahmad','0717766554','salwaahmad@yahoo.com','9193959899',980,40,'female','Zarqa','5-mar-1991',34);
+insert into people values(13,'Omar','Ahmad','0711115111','omarahmad@yahoo.com','9999999991',550,70,'male','Aqaba','28-mar-1985',51);
+insert into people values(14,'Nawal','Jamal','0712211111','nawalkhaled@yahoo.com','9999999919',220,20,'female','Amman','17-feb-1989',21);
+insert into people values(15,'Khaled','Jamal','0711113311','khaledjamal@yahoo.com','9999999199',880,10,'male','Zarqa','15-feb-1994',18);
+commit;
