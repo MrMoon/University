@@ -7,3 +7,5 @@
 - Lab 4
 	- [part I](https://drive.google.com/file/d/1h9kHNgbc0Tx9BHgIuC0USQszcre0u8k6/view?usp=share_link)
 	- [part II](https://drive.google.com/file/d/1692LiMec4UWA4h-eiWUBsuoafwMtfoHe/view?usp=share_link)
+- Lab 5
+- [Lab 6](https://drive.google.com/file/d/1lYjDIOUooV0z-EA9pEnWdThCMZVQu8Pc/view?usp=sharing)
