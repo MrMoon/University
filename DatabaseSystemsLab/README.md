@@ -13,3 +13,5 @@
 	- [part I](https://drive.google.com/file/d/1hVIRCtzzwDZ6vfls00ZR9xcTfe3Se8Pi/view?usp=sharing)
 	- [part II](https://drive.google.com/file/d/10vW4FgsFrf6Tb8HuQszR7GtS9Ys25tVF/view?usp=sharing)
 	- [part III](https://drive.google.com/file/d/bc1qerdz7v3rqqg7amg4q6ka4xl96vlhc3ka5ndta2/view?usp=sharing)
+- [Lab 8](https://drive.google.com/file/d/1u3cc36pp4aDTrTouI5QQ6byyhBRBThdB/view?usp=sharing)
+- [Lab 9](https://drive.google.com/drive/folders/1W2icqMmt4-wKyDzXbA4xgdZSMMfcDkF-?usp=sharing)
