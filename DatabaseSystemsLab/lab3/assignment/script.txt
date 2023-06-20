@@ -1,6 +1,0 @@
-insert into people values(16,'Ali','Jamal','0711213311',null,'9999999199',880,10,'male',null,'15-feb-1994',13);
-insert into people values(17,'Omar','Jamal',null,'omarjamal@yahoo.com','9999999199',880,10,'male',null,'17-feb-1994',33);
-insert into people values(18,'Khaled','Hamad','0714113311','khaledhamad@yahoo.com','9999999199',880,10,'male','Zarqa','19-feb-1994',4);
-insert into people values(19,'Ola','Fathi',null,null,'9999999199',880,10,'male','Zarqa','25-feb-1994',18);
-insert into people values(20,'Dima','Sami','0716113311','dimasami@yahoo.com','9999999199',880,10,'male','Zarqa','12-feb-1994',18);
-commit;
